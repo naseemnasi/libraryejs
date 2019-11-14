@@ -1,50 +1,53 @@
-const express=require("express");
-const chalk=require("chalk");
-const path=require("path");
+const express = require("express");
+const chalk = require("chalk");
+const path = require("path");
+const bodyparser = require("body-parser");
+const cors = require("cors");
 
-var app=new express();
-const booksRouter=express.Router();
-
-var nav=[
-            {link:'/',title:"Home"},
-            {link:'/login',title:"login"},
-            {link:'/signup',title:"Sing up"},
-            {link:'/books',title:"Books"},
-            {link:'/aouthers',title:"Aouthers"}
-        ];
-
-var book=[
-        {title:'1stbook',genre:"1st genre",aouther:"a1"},
-        {title:'2stbook',genre:"2st genre",aouther:"a2"},
-        {title:'3stbook',genre:"3st genre",aouther:"a3"},
-        {title:'4stbook',genre:"4st genre",aouther:"a4"},
-        {title:'5stbook',genre:"5st genre",aouther:"a5"}
-        ];
-app.use('/books',booksRouter);
+var app = new express();
+var nav = [
+    { link: '/', title: "Home" },
+    { link: '/login', title: "login" },
+    { link: '/signup', title: "Sing up" },
+    { link: '/books', title: "Books" },
+    { link: '/authers', title: "Authers" },
+    { link: '/books/addbook', title: "ADD BOOK" }
+];
 
 
-app.use(express.static(path.join(__dirname,"/public")));
-app.set("views","./src/views");
-app.set("view engine","ejs");
-app.get("/",function (req,res){
+
+
+
+
+app.use(express.static(path.join(__dirname, "/public")));
+app.use(cors());
+app.use(bodyparser.json());
+
+app.use(bodyparser.urlencoded({
+    extended: true
+}))
+app.set("views", "./src/views");
+app.set("view engine", "ejs");
+
+
+const booksRouter = require('./src/routes/bookRoutes')(nav);//passing nav to booksRouter
+const autherRoute = require('./src/routes/autherRout')(nav) //passing nav to aouther
+
+app.use('/books', booksRouter);
+app.use('/authers', autherRoute);
+
+
+
+app.get("/", function (req, res) {
     res.render("home",
-    {
-        nav,
-        title:"library",
-        
-    });
+        {
+            nav,
+            title: "LIBRARY",
+
+        });
 
 });
 
-app.listen(3000,function(){
-    console.log("listerning to port"+chalk.green('3000'))
+app.listen(3000, function () {
+    console.log("listerning to port" + chalk.green('3000'))
 });
-
-booksRouter.route('/')
-.get((req,res)=>{
-    res.render('books',{
-        nav,
-        title:"library",
-        book
-    })
-})

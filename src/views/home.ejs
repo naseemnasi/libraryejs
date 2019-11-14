@@ -31,14 +31,16 @@
                 </li>
             </ul>
     </nav> -->
-    <div>
+    <div class="navbar navbar-dark bg-dark">
             <%for(var i=0;i<nav.length;i++){%>
-                <a href="<%=nav[i].link%>"><%=nav[i].title%></a>
+                 <ul class="navbar-nav">
+                     <li class="nav-item"><a href="<%=nav[i].link%>"><%=nav[i].title%></a></li>
+                 </ul>
             <%}%>
         </div>
      <div class="jumbotron jumbotron-fluid" style="background-color: rgb(1, 1, 43);" >
          <div class="container text-light">
-             <h1><em>LIBRARY</em></h1> 
+             <h1><em><%=title%></em></h1> 
              <div class="jumpotrone jumbotron-fluid" style="margin-left:600px;background-color:rgb(16, 1, 100);height:100px;margin-top:-50px;margin-right:-20px">
                  <label for="text" class="text-light"></label>
              </div>

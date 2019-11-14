@@ -49,19 +49,21 @@
 
     <div class="jumbotron" style="border-radius: 0%; margin-top:-80px;margin-right:100px;margin-left:100px;height:500px;background-color: white;">
             <div class="container">
-              <table class="table table-striped">
-                <tr><th>IMAGE</th>
-                <th>DESCRIPTION</th></tr>
-                <%for(var i=0;i<books.length;i++){%>
-                    <tr><td><img src="/image/<%=books[i].img%>" class="align-self-start mr-3 rounded-circle" style="height:80px  "></td>
-                    
-                    <td><h5><%=books[i].title%></h5>
-                    <h6><%=books[i].genre%></h6>
-                    <h6><%=books[i].aouther%></h6>
-                    <a href="/books/<%=i%>">Read more</a></td>
-                    </tr>   
-                <%}%>
-              </table>
+              
+                <table class="table table-striped">
+                    <tr><th>IMAGE</th>
+                    <th>AUTHER DETAILS</th></tr>
+                    <%for(var i=0;i<authers.length;i++){%>
+                        <tr><td><h6><img src="/image/<%=authers[i].imag%>" class="align-self-start mr-3 rounded-circle" style="height:80px  "></h6></td>
+                        
+                        <td><h5><%=authers[i].name%></h5>
+                        <h6><%=authers[i].dob%></h6>
+                       
+                        <a href="/authers/<%=i%>">Read more</a></td>
+                        </tr>   
+                    <%}%>
+                  </table>
+                
             </div>
           </div>
 
